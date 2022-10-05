@@ -1,0 +1,538 @@
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height:100vh; 
+  overflow-x: hidden;
+  background: linear-gradient(rgb(235, 240, 255), rgb(255, 255, 255));
+}
+
+
+/* NAV +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+
+nav {
+    background: linear-gradient(rgb(0, 0, 0), rgb(102, 120, 251));
+    padding: 5px 20px;
+      box-shadow: 0px 5px 8px #888888;
+      z-index: 150;
+  }
+  ul {
+    list-style-type: none;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  li {
+    color: white;
+    list-style: none;
+  }
+
+
+  /* Add a black background color to the top navigation */
+.topnav {
+  overflow: hidden;
+}
+
+.topnav img {
+  width: 50px;
+  height: 50px;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.buttonStart {
+  float: right;
+  display: block;
+  padding: 6px 12px;
+  margin-top: 6px;
+  border-style:solid;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  border-color: rgb(234, 234, 13);
+  width: 8.5em;
+  border-width: 1.5px;
+  background-color: transparent;
+  transition: 1s;
+}
+
+.buttonStart:hover {
+  border-color: transparent;
+  background: linear-gradient(rgb(0, 0, 0), rgb(41, 43, 58));
+}
+
+.icon.hide{
+  visibility: hidden;
+}
+
+.deployLogin {
+  display: none;
+}
+
+.deployLogin.deployed {
+  display: block;
+  border-radius: 3px;
+  position: absolute;
+  margin-top: 8px;
+  background: linear-gradient(rgb(0, 0, 0), rgb(102, 120, 251));
+  max-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  text-align: left;
+}
+
+.deployLogin.deployed a {
+  display: block;
+  width: 100%;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  color: black;
+}
+
+/* Add an active class to highlight the current page */
+.topnav a.active {
+  color: green;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+  display: none;
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav div {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+  
+  .topnav.responsive {
+    position: relative;
+    height: 100vh;
+  }
+
+  .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: center;
+  }
+
+  .topnav.responsive div {
+    float: none;
+    display: block;
+    text-align: center;
+    margin: auto;
+  }
+    .elementsNav{
+      margin-top: 3em;
+    }
+
+  .deployLogin.deployed {
+    display: block;
+    width: 100%;
+    margin: auto;
+    border: none;
+    border-radius: none;
+    position: relative;
+    margin-top: none;
+    background: none;
+    box-shadow: none;
+    padding: none;
+    z-index: none;
+  }
+
+
+  .deployLogin.deployed a {
+    color: rgb(0, 0, 0);
+  }
+
+  .buttonStart {
+    width: 50%;
+    text-align: center;
+  }
+
+
+  .buttonStart:hover {
+    border-color: transparent;
+    background: none;
+  }
+}
+
+/* FOOTER +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+footer {
+
+  background: linear-gradient(rgb(192, 239, 251), rgb(119, 143, 191));
+  margin-top: 2em;
+  height: 6em;
+  grid-area: footer;
+
+}
+
+.footer-grid{
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-items: center;
+  align-items:center;
+  margin: auto;
+}
+
+.foot-item {
+    display: grid;
+}
+
+footer label {
+    display: block;
+}
+
+
+/* LANDING PAGE ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.title {
+    position: absolute;
+    margin-top: 1em;
+    color: white;
+}
+
+.landImage {
+    width: 100vw;
+    height: 70vh;
+}
+
+.landImage img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.landingBlocks{
+  display:inline-flex;
+  align-items:center;
+  width: 100vw;
+  justify-content: space-around;
+  align-items:flex-start;
+  margin-top: 8em;
+}
+
+.landingBlocks_desc {
+  width: 40vw;
+  text-align: justify;
+}
+
+.landingBlocks_desc  p {
+  font-size: 22px;
+}
+
+.benefits {
+    width: 30vw;
+    height: 10em;
+    margin-top: 2em;
+    border-radius: 5px;
+    max-width: 350px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.benefits button {
+  border: solid;
+  border-color: rgb(129, 200, 251) ;
+  border-radius: 15px;
+  background: linear-gradient(rgb(0, 0, 0), rgb(102, 120, 251));
+  width: 7em;
+  color: rgb(255, 255, 255);
+  box-shadow: 10px 10px 8px #888888;
+} 
+
+.benefits i {
+  text-align: center;
+  width: 100%;
+  filter: drop-shadow(20px 10px 4px #a3a3c7);
+} 
+
+.fa-solid {
+    font-size: 3em;
+    vertical-align: middle;
+    animation: icons-land 2s ease-in-out
+    infinite;
+}  
+
+@keyframes icons-land {
+
+0% {
+transform: translateY(0);
+}
+50% {
+transform: translateY(-20px);
+}
+100% {
+transform: translateY(0);
+}
+}
+
+@media screen and (min-width: 600px) {
+
+}
+
+/* LOGIN PAGE --------------------------------------------------------------------------*/
+
+.formLog {
+  max-width: 400px;
+  margin: auto;
+}
+
+
+.loginTit {
+  text-align: center;
+  margin-top: 3em;
+  filter: drop-shadow(10px 5px 8px #9393b5);
+}
+
+.loginSub {
+  text-align:end;
+  filter: drop-shadow(10px 5px 8px #9393b5);
+  width: 80%;
+}
+
+
+
+.loginInputs {
+  margin: auto;
+  margin-top: 3em; 
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  filter: drop-shadow(10px 5px 2px #dcdce9);
+}
+
+.loginInputs select {
+  margin-top: 2em;
+  width: 100%;
+  border-color: transparent;
+  border-radius: 6px;
+}
+
+.loginInputs input {
+  margin-top: 2em;
+  height: 2em;
+  border: rgb(255, 255, 255);
+  border-radius: 6px;
+}
+
+.loginInputs2 {
+  margin: auto;
+  margin-top: 2em; 
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  filter: drop-shadow(10px 5px 2px #dcdce9);
+}
+
+.loginInputs2 input {
+  width: 45%;
+  border-radius: 6px;
+  border: rgb(255, 255, 255);
+}
+
+.formLog button {
+  margin-top: 2em;
+  background: linear-gradient(rgb(0, 132, 255), rgb(172, 179, 228));
+  border-radius: 5px;
+  width: 100%;
+  filter: drop-shadow(10px 5px 2px #dcdce9);
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2em;
+  height: 3em;
+  color: rgb(255, 0, 0);
+  border: 1px solid;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  filter: drop-shadow(10px 5px 2px #dcdce9);
+}
+
+.BtnNotAvailable {
+  opacity: 50%;
+  cursor: not-allowed;
+  margin-bottom: 2em;
+  height: 2em;
+}
+
+
+/* ASIDE --------------------------------------------------------------------------*/
+
+
+.mainLogged {
+  position: absolute;
+  top: 2em;
+  margin: auto;
+  width: 100%;
+  z-index: 1;
+
+}
+.mainLogged div{
+  margin: auto;
+  text-align: center;
+}
+
+
+.search {
+  width: 80%;
+  filter: drop-shadow(10px 5px 2px #dcdce9);
+  border-radius: 6px;
+  border-color: transparent;
+}
+
+
+.aside {
+  position: relative;
+  z-index: 100;
+  left: -29%;
+  width: 30vw;
+  top: 9%;
+  height: 90vh;
+  background-color: rgb(199, 221, 248);
+}
+
+.btn-open-side{
+  display: block;
+  position: absolute;
+  right: -2em;
+}
+
+.btn-open-side button {
+  border-color: transparent;
+  filter: drop-shadow(10px 5px 2px #dcdce9);
+  background-color: rgb(154, 196, 233);
+  border-radius: 5px;
+}
+
+.asideMoveRight{
+  position: relative;
+  z-index: 100;
+  left: 0%;
+  top: -4em;
+  width: 30vw;
+  height: 100vh;
+  background-color: rgb(34, 41, 50);
+  color: white;
+  border-radius: 5px;
+}
+
+
+.btn-close-side{
+  visibility: hidden;
+}
+
+.btn-close-side-enabled{
+  display: block;
+  position: absolute;
+  right: 0em;
+  visibility: visible;
+}
+.btn-close-side-enabled button {
+  border-color: transparent;
+  background-color: rgb(230, 13, 92);
+  border-radius: 20px;
+  color: black;
+}
+
+.products {
+  display: flex;
+  margin: auto;
+  margin-top: 3em;
+  border-radius: 15px;
+  max-width:60%;
+  min-width: 50px;
+  height: 3em;
+  justify-content: center;
+  align-items: center;
+}
+
+.products img {
+  width: 70px;
+  height: 70px;
+}
+
+.fa-user {
+  font-size: 18px;
+  animation: none;
+}
+
+.products a img {
+  width: 30;
+  height: 30px;
+}
+
+.logout {
+  color: red;
+}
+
+@media screen and (max-width: 600px) {
+  .asideMoveRight{
+    width: 100vw;
+  }
+}
+
+
+/* LOGGED SUCCESS --------------------------------------------------------------------------*/
+
+.sectionTrends {
+  margin-top: 2em;
+}
+
+.trends-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 2em;
+  justify-content: space-around;
+}
+
+.box {
+  margin-top: 2em;
+  background-color: #ffffff;
+  object-fit: cover;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.box img {
+  width: 300px;
+}
