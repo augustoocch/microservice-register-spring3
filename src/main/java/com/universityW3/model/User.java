@@ -36,6 +36,8 @@ public class User implements Serializable {
     private String surname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 45)
+    private String password;
+    @Size(max = 45)
     private String email;
     @Size(max = 45)
     
@@ -51,9 +53,10 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String name, String surname, String email, String idCard, String country, String city, Integer zc) {
+    public User(String name, String surname, String password, String email, String idCard, String country, String city, Integer zc) {
         this.name = name;
         this.surname = surname;
+        this.password = password;
         this.email = email;
         this.idCard = idCard;
         this.country = country;
@@ -96,6 +99,14 @@ public class User implements Serializable {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {

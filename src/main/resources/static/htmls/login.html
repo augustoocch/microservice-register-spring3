@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
     <head>
         <title>UniversityW3 - login</title>
-        <link rel="icon" href="images/icon.ico" />
+        <link rel="icon" href="@{images/icon.ico}" />
         <meta charset='utf-8'>
         <meta name='keywords' content='js,Java,React,nodeJs,developer,junior Developer' />
         <meta name="author" content="Augusto Occhiuzzi" />
@@ -19,7 +19,7 @@
         <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Lobster+Two&family=Nunito:wght@200&family=Smooch+Sans:wght@100&display=swap"
         rel="stylesheet">
-        <link rel="icon" href="images/" />
+        <link rel="icon" href="@{images/neuLogo.png}" />
 
         <!--Bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -35,13 +35,13 @@
             <nav>
                 <div class="topnav" id="myTopnav">
                     <img src="../images/neuLogo.png" />
-                    <a href="../index.html" class="active">Our company</a>
+                    <a href="../..}" class="active">Our company</a>
                     <a href="#news">Products</a>
-                    <label class="butonHb">Start Learning
-                        <div class="deployLogin">
+                    <div class="buttonStart elementsNav">Start Learning
+                        <button class="deployLogin">
                             <a  href="register.html">- Register</a>
-                        </div>    
-                    </label>
+                        </button>    
+                    </div>
                     <a href="javascript:void(0);" class="icon" id="menuBurger" >
                       <i class="fa fa-bars"></i>
                     </a>
@@ -56,10 +56,10 @@
 
             <h1 class="loginTit" >Login...</h1>
             <h2 class="loginSub">...and manage your future</h2>
-            <form class="formLog" th:action="@{/login}" th:object="${user}" method="post">
+            <form class="formLog" th:action="@{/login}" method="ppst" th:object="${user}">
                 <div class="loginInputs">
-                    <input type="email" id="emailLog" placeholder="email">
-                    <input class="logInput" type="password" id="password" placeholder="Password">
+                    <input type="email" id="emailLog" th:field="*{email}" placeholder="email">
+                    <input class="logInput" type="password" th:field="*{password}" id="password" placeholder="Password">
                 </div>
                 <button class="BtnNotAvailable"  id="logRegister" type="submit">Log in</button>
             </form>
