@@ -1,8 +1,9 @@
-package com.universityW3.model;
+package com.universityW3.repository;
 
 import javax.persistence.Id;
+
+import com.universityW3.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 

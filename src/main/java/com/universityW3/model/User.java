@@ -20,16 +20,14 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name"),
     @NamedQuery(name = "User.findBySurname", query = "SELECT u FROM User u WHERE u.surname = :surname"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
-    @NamedQuery(name = "User.findByIdCard", query = "SELECT u FROM User u WHERE u.idCard = :idCard"),
-    @NamedQuery(name = "User.findByCity", query = "SELECT u FROM User u WHERE u.city = :city"),
-    @NamedQuery(name = "User.findByZc", query = "SELECT u FROM User u WHERE u.zc = :zc")})
+    @NamedQuery(name = "User.findByCity", query = "SELECT u FROM User u WHERE u.city = :city")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    private Integer iduser;
+    private Long iduser;
     @Size(max = 45)
     private String name;
     @Size(max = 45)
@@ -40,45 +38,44 @@ public class User implements Serializable {
     @Size(max = 45)
     private String email;
     @Size(max = 45)
-    
     private String country;
     @Size(max = 40)
-    
-    private String idCard;
-    @Size(max = 45)
     private String city;
-    
-    private Integer zc;
+    @Size(max = 45)
+
+
 
     public User() {
     }
 
-    public User(String name, String surname, String password, String email, String idCard, String country, String city, Integer zc) {
+    public User(String name, String surname, String password, String email, String country, String city) {
         this.name = name;
         this.surname = surname;
         this.password = password;
         this.email = email;
-        this.idCard = idCard;
         this.country = country;
         this.city = city;
-        this.zc = zc;
     }
     
 
-    public User(Integer iduser) {
+    public User(Long iduser) {
         this.iduser = iduser;
     }
 
-    public Integer getIduser() {
+    public Long getIduser() {
         return iduser;
     }
 
-    public void setIduser(Integer iduser) {
+    public void setIduser(Long iduser) {
         this.iduser = iduser;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCountry() {
@@ -87,10 +84,6 @@ public class User implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSurname() {
@@ -117,28 +110,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
-
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public Integer getZc() {
-        return zc;
-    }
-
-    public void setZc(Integer zc) {
-        this.zc = zc;
     }
 
 
