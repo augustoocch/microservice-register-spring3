@@ -1,7 +1,6 @@
 package com.universityW3.DAO;
 
-import com.universityW3.model.User;
-import jdk.jfr.DataAmount;
+import com.universityW3.model.Users;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,6 +9,6 @@ import java.util.Set;
 @Data
 @Builder
 public class UserDao {
-    private User usuario;
+    private Users usuario;
     private Set<String> roles;
 }
