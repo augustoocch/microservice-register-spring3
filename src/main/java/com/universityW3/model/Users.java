@@ -40,7 +40,7 @@ public class Users implements Serializable {
     @Column(name = "city", nullable = false, length = 40)
     private String city;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name="users_roles",
             joinColumns = @JoinColumn(name="id_users"),

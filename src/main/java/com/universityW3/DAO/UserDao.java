@@ -9,6 +9,6 @@ import java.util.Set;
 @Data
 @Builder
 public class UserDao {
-    private Users usuario;
+    private String username;
     private Set<String> roles;
 }

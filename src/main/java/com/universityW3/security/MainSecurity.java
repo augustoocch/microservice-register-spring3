@@ -1,5 +1,6 @@
 package com.universityW3.security;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
@@ -25,8 +28,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class MainSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    JwtEntryPoint jwtEntryPoint;
-
+    private JwtEntryPoint jwtEntryPoint;
 
     @Autowired
     private UserDetailedService userDetailService;
@@ -34,61 +36,68 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(this.userDetailService)
-        .passwordEncoder(this.passwordEncoder());
+                .passwordEncoder(this.passowrdEncoder());
     }
-    
-    protected AuthenticationManager authManager() throws Exception {
+
+    protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
-    }
-    
-    @Bean
-    public AuthenticationManager authManagBean() throws Exception {
-        return super.authenticationManagerBean();
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
     
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/").permitAll()
-                .antMatchers(new String[] {"/auth/**"}).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .exceptionHandling().authenticationEntryPoint(this.jwtEntryPoint)
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-   
-        //ante cada peticion se coloca el filtro jwt
-        http.addFilterAfter(this.jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-    }
-    
+   @Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			.cors().and()
+			.csrf().disable()
+			.authorizeRequests()
+			.antMatchers(HttpMethod.GET,"/").permitAll()
+			.antMatchers(new String[]{"/auth/**"}).permitAll()
+			.antMatchers("/v2/api-docs","/configuration/**","/swagger*/**","/webjar/**").permitAll()
+			.anyRequest().authenticated()
+			.and()
+			//exception handler > error
+			.exceptionHandling().authenticationEntryPoint(this.jwtEntryPoint)
+			.and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
+		http.addFilterAfter(this.jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+	}
+        
+        
     @Bean
     public JwtTokenFilter jwtTokenFilter() {
         return new JwtTokenFilter();
     }
 
     @Bean
-    CorsConfigurationSource corsConfig () {
+    public BCryptPasswordEncoder passowrdEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    public String passowrdEncrypt(String passw) {
+
+        String passwordE = null;
+        try {
+            passwordE = new String(passowrdEncoder().encode(passw).toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return passwordE;
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         //corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
-        corsConfiguration.setAllowedOrigins(List.of("*"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         corsConfiguration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         corsConfiguration.setAllowCredentials(true);
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
-
         return source;
     }
-
 }
-
-
-//.antMatchers("/v2/api-do/home/augusto-occ/Downloads/spring-security-crypto-5.7.4.jarcs","/configuration/**","/swagger*/**","/webjar/**").permitAll()
-

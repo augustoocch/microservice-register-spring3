@@ -32,12 +32,12 @@ public class Admin {
 
     @Column(name = "mat", nullable = false)
     private String mat;
-
-    @OneToMany(fetch = FetchType.EAGER)
+    
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name="users_roles",
-            joinColumns = @JoinColumn(name="id_users"),
-            inverseJoinColumns = @JoinColumn(name="id_roles")
+            name="admin_roles",
+            joinColumns = @JoinColumn(name="id_admin"),
+            inverseJoinColumns = @JoinColumn(name="id_role")
     )
     private Set<Roles> roles;
 

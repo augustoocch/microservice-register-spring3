@@ -20,10 +20,10 @@ public class Course {
     @Column(name = "id_curso")
     private long idCurso;
 
-    @Column(name = "nombre", nullable = false, length = 45)
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name= "precio", nullable = false, length = 4)
+    @Column(name= "precio")
     private float precio;
 
 

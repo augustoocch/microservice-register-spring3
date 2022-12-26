@@ -1,21 +1,24 @@
 package com.universityW3.security;
 
+import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Component;
 
 @Component
+@PropertySource("application.properties")
 public class JwtProvider {
 
     @Value("${jwt.secret}")
@@ -25,13 +28,13 @@ public class JwtProvider {
     private long expiration;
 
     public boolean validateToken(String jwtToken) {
-
         Jwts.parser()
                 .setSigningKey(this.secret)
                 .parseClaimsJws(jwtToken);
 
         return true;
     }
+
 
     public String getUsernameFromToken(String jwtToken) {
 

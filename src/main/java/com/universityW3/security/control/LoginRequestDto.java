@@ -8,6 +8,10 @@ import lombok.*;
 @Getter
 @Builder
 public class LoginRequestDto {
-    private String username;
+    private String name;
+    private String surname;
     private String password;
+    private String email;
+    private String country;
+    private String city;
 }

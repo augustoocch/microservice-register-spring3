@@ -1,7 +1,9 @@
 package com.universityW3.service;
 
+import com.universityW3.model.Admin;
 import com.universityW3.model.Users;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,20 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Users findByEmail(String email) {
-        return userRep.findByEmail(email);
+
+        List<Users> allAdmins = userRep.findAll();
+        try {
+            List<Users> listAndFind = allAdmins
+                    .stream()
+                    .filter(a -> ((a.getEmail()).equals(email)))
+                    .collect(Collectors.toList());
+            if (listAndFind.size() == 0) {
+                return null;
+            }
+            return listAndFind.get(0);
+        } catch (IllegalArgumentException ex) {
+            ex.printStackTrace(System.out);
+        }
+        return null;
     }
 }
