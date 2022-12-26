@@ -2,12 +2,14 @@ package com.universityW3.swagger;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -30,7 +32,9 @@ public class SpringFox {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
+                //.apis(RequestHandlerSelectors.basePackage("com.universityW3.controller"))
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+                //.paths(Predicate.not(PathSelectors.regex("/error.*")))
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(securityContext())

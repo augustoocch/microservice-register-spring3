@@ -2,7 +2,6 @@ package com.universityW3.service;
 
 
 import com.universityW3.model.Admin;
-
 import java.util.List;
 
 public interface AdminService {

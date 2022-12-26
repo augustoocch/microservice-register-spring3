@@ -1,6 +1,7 @@
 package com.universityW3.service;
 
 import com.universityW3.model.Course;
+import org.springframework.stereotype.Service;
 
 public interface CourseService {
 

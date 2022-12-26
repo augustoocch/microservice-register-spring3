@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 
-
+@RestController
 public class CourseController {
 
     @Autowired
@@ -17,8 +17,7 @@ public class CourseController {
 
     @GetMapping(value = "/find-course/{course}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseEntity<Course> findCourse(
-            @PathVariable(name = "course", required = true) String courseName) {
+    public ResponseEntity<Course> findCourse(@PathVariable(name = "course", required = true) String courseName) {
         if (courseService.findCourse(courseName) != null) {
             Course curso = new Course();
             curso = courseService.findCourse(courseName);
