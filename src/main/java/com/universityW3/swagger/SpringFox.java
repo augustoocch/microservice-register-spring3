@@ -68,25 +68,3 @@ public class SpringFox {
                 .build();
     }
 }
-
-/*
-				@Bean
-    public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
-                .paths(PathSelectors.any())
-                .build()
-                .securityContexts(securityContext())
-                .securitySchemes(securitySchemes())/*
-				.useDefaultResponseMessages(false)
-				.globalResponses(HttpMethod.GET, List.of(
-				    new ResponseBuilder().code("500")
-				        .description("500 message").build(),
-				    new ResponseBuilder().code("403")
-				        .description("Forbidden!!!!!").build(),
-			        new ResponseBuilder().code("401")
-				        .description("NA NO TENES PERMISOS").build()
-				))*/
-

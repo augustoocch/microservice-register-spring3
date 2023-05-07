@@ -14,7 +14,7 @@
     <name>universityW3</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>18</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -100,10 +100,6 @@
             <artifactId>jakarta.ws.rs-api</artifactId>
             <version>2.1.6</version>
             <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 

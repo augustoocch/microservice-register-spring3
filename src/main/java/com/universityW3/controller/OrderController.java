@@ -31,10 +31,10 @@ public class OrderController {
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Orders> newOrder(@RequestBody Orders orders) {
         if (ordersService.findOrder(orders.getId()) != null) {
-            return new ResponseEntity("Order: " + orders + " already exist", HttpStatus.ACCEPTED);
+            return new ResponseEntity("Order: " + orders + " already exist", HttpStatus.BAD_REQUEST);
         } else {
             ordersService.createOrder(orders);
-            return new ResponseEntity("Order created properly with id: " + orders.getId(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity("Order created properly with id: " + orders.getId(), HttpStatus.ACCEPTED);
         }
     }
 
