@@ -30,7 +30,7 @@ public class AdminDetailedService implements UserDetailsService {
                     .collect(Collectors.toSet());
 
             //org.springframework.security.core.userdetails.User;
-            return new User(newAdmin.getMat(), newAdmin.getPassword(), roles);
+            return new User(newAdmin.getEmail(), newAdmin.getPassword(), roles);
         }
 }
 
