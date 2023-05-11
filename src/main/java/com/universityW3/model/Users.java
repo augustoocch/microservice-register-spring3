@@ -5,8 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
-import javax.persistence.*;
+import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 @Entity
@@ -14,7 +19,7 @@ import javax.persistence.*;
        schema = "universityW3")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users implements Serializable {
+public class Users implements UserDetails {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,5 +53,35 @@ public class Users implements Serializable {
     )
     private Set<Roles> roles;
 
-    
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        return List.of(new SimpleGrantedAuthority(roles.toString()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

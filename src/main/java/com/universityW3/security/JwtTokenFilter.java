@@ -6,18 +6,22 @@ package com.universityW3.security;
 
 import java.io.IOException;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
+@Component
+@RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -27,21 +31,27 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     private UserDetailedService userDetailedService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String jwt = getToken(request);
+    protected void doFilterInternal(
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain)
+            throws ServletException, IOException {
 
-        if (jwt== null) {
+        //this contains the bearer token
+        final String authHeader = request.getHeader("Authorization");
+        final String jwt;
+        final String userEmail;
+
+        //Validate if the authHeader is a bearer
+        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
+        //Assign the token to the jwt
+        jwt = authHeader.substring(7);
 
-        if(!this.jwtProvider.validateToken(jwt)) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-
-        String userNameFromJwt = this.jwtProvider.getUsernameFromToken(jwt);
+        //Get the user from the acquired token
+        userEmail = this.jwtProvider.getUsernameFromToken(jwt);
         UserDetails userDetails = userDetailedService.loadUserByUsername(userNameFromJwt);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);

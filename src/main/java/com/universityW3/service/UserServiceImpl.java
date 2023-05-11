@@ -5,11 +5,12 @@ import com.universityW3.model.Users;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.universityW3.repository.UserRepository;
 
-import javax.transaction.Transactional;
+
 
 @Transactional
 @Service("userService")

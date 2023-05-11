@@ -1,11 +1,16 @@
 package com.universityW3.model;
 
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -14,7 +19,7 @@ import java.util.Set;
         schema="universityW3")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Admin {
+public class Admin implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +35,8 @@ public class Admin {
     @Column(name = "password", nullable = false, length = 45)
     private String password;
 
-    @Column(name = "mat", nullable = false)
-    private String mat;
+    @Column(name = "email", nullable = false)
+    private String email;
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -41,4 +46,33 @@ public class Admin {
     )
     private Set<Roles> roles;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(roles.toString()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

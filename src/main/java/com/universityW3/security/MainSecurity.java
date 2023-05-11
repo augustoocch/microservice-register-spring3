@@ -1,8 +1,10 @@
 package com.universityW3.security;
 
 
+import java.io.IOException;
 import java.util.List;
 
+import jakarta.servlet.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,11 +13,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -26,6 +27,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MainSecurity extends WebSecurityConfigurerAdapter {
+    //WebSecurityConfigurerAdapter esta deprecado
+    //Hay que migrarlo
 
     @Autowired
     private JwtEntryPoint jwtEntryPoint;
@@ -61,17 +64,27 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated()
 			.and()
 			//exception handler > error
-			.exceptionHandling().authenticationEntryPoint(this.jwtEntryPoint)
+			.exceptionHandling().authenticationEntryPoint((AuthenticationEntryPoint) this.jwtEntryPoint)
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		
-		http.addFilterAfter(this.jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+		//http.addFilterAfter(this.filter(), UsernamePasswordAuthenticationFilter.class);
 	}
         
         
     @Bean
     public JwtTokenFilter jwtTokenFilter() {
         return new JwtTokenFilter();
+    }
+
+    @Bean
+    public Filter filter() {
+        return new Filter() {
+            @Override
+            public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
+            }
+        };
     }
 
     @Bean
