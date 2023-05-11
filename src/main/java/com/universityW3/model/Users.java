@@ -1,6 +1,7 @@
 package com.universityW3.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
        schema = "universityW3")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Users implements UserDetails {
 
     private static final long serialVersionUID = 1L;

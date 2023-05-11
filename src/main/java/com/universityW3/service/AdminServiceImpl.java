@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService{
         try {
             List<Admin> listAndFind = allAdmins
                     .stream()
-                    .filter(a -> ((a.getMat()).equals(adminFind)))
+                    .filter(a -> ((a.getEmail()).equals(adminFind)))
                     .collect(Collectors.toList());
             if (listAndFind.size() == 0) {
                 return null;
