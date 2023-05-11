@@ -41,12 +41,6 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public UserDetailsService adminDetailsService() {
-        return username -> adminRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Admin not found"));
-    }
-
-    @Bean
     public AuthenticationProvider authenticationProvider() {
         //This is the DAO responsible to fetch the userDetails and encode passwords
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

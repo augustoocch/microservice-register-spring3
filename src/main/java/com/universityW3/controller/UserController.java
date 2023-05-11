@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.core.MediaType;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,7 +22,6 @@ public class UserController {
 
 
     @GetMapping(value = "/find-user/{user}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Users> findByMail(
             @PathVariable(name ="user", required = true) String email) {
         if (userServ.findByEmail(email) != null) {
@@ -40,7 +37,6 @@ public class UserController {
 
 
     @PostMapping(value="/validate-user")
-    @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Users> loginRequest(
             @RequestBody Users usuario) {
         if (userServ.findByEmail(usuario.getEmail()) != null) {
@@ -56,7 +52,6 @@ public class UserController {
     }
 
     @PutMapping(value="/new-user")
-    @Consumes(MediaType.APPLICATION_JSON)
     public  ResponseEntity<Users> newUser(@RequestBody Users usuario) {
         if(userServ.findByEmail(usuario.getEmail()) != null) {
             return new ResponseEntity("User: " + usuario.getEmail() +" already exist", HttpStatus.BAD_REQUEST);
@@ -79,7 +74,6 @@ public class UserController {
     }
 
     @PatchMapping(value = "/update-user")
-    @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Users> updateUser (@RequestBody Users usuario) {
         if(userServ.findByEmail(usuario.getEmail()) != null) {
             Users newUsers = userServ.findByEmail(usuario.getEmail());
@@ -111,7 +105,6 @@ public class UserController {
     }
 
     @DeleteMapping(value="/delete-user")
-    @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Users> deleteUser(@RequestBody Users usuario) {
         if (userServ.findByEmail(usuario.getEmail()) == null) {
             return new ResponseEntity("User: " + usuario.getEmail() + " doesn't exist.", HttpStatus.BAD_REQUEST);

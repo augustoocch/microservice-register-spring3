@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("http://localhost:8080/login", "http://localhost:8080/register")
+                .requestMatchers("/api/v1/auth")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -46,8 +46,6 @@ public class SecurityConfig {
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-
-
         return httpSecurity.build();
     }
 

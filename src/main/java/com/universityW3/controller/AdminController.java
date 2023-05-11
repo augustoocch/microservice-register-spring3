@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.core.MediaType;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,7 +20,6 @@ public class AdminController {
     AdminService adminService;
 
     @GetMapping(value="/find-admin/{admin}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<String> findAdmin(@PathVariable(name ="admin", required = true) String mat) {
         if (adminService.findByMat(mat) != null) {
                 Admin admin = new Admin();
@@ -35,7 +32,6 @@ public class AdminController {
 
 
     @PostMapping(value="/validate-admin")
-    @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity<Admin> loginRequest(@RequestBody Admin admin) {
         if (adminService.findByMat(admin.getMat()) != null) {
             if (admin.getPassword().equals((adminService.findByMat(admin.getMat())).getPassword())) {
@@ -50,7 +46,6 @@ public class AdminController {
     }
 
     @PutMapping(value="/new-admin")
-    @Consumes(MediaType.APPLICATION_JSON)
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> newAdmin(@RequestBody Admin admin) {
         if(adminService.findByMat(admin.getMat()) != null) {
@@ -78,7 +73,6 @@ public class AdminController {
 
 
     @PatchMapping(value = "/update-admin")
-    @Consumes(MediaType.APPLICATION_JSON)
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> updateAdmin (@RequestBody Admin admin) {
         if(adminService.findByMat(admin.getMat()) != null) {
@@ -104,7 +98,6 @@ public class AdminController {
     }
 
     @DeleteMapping(value="/delete-admin")
-    @Consumes(MediaType.APPLICATION_JSON)
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> deleteAdmin(@RequestBody Admin admin) {
         if (adminService.findByMat(admin.getMat()) == null) {

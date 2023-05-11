@@ -6,7 +6,6 @@ package com.universityW3.security;
 
 import java.io.IOException;
 
-import com.universityW3.config.UserDetailedService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
