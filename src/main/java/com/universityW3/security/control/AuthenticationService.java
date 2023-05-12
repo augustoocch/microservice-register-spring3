@@ -61,7 +61,7 @@ public class AuthenticationService {
                         req.getPassword()
                 )
         );
-        var user = userRepository.findByEmail(req.getEmail())
+        var user = userRepository.findByMailNR(req.getEmail())
                 .orElseThrow();
         var jwtToken = jwtProvider.generateToken(user);
         return AuthenticationResponse.builder()
