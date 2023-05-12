@@ -1,9 +1,10 @@
-package com.universityW3.security.control;
+package com.intralink.user.micro.security.control;
 
-import com.universityW3.model.Roles;
-import com.universityW3.model.Users;
-import com.universityW3.repository.UserRepository;
-import com.universityW3.security.JwtProvider;
+import com.intralink.user.micro.model.Roles;
+import com.intralink.user.micro.model.Users;
+import com.intralink.user.micro.repository.UserRepository;
+import com.intralink.user.micro.security.JwtProvider;
+import com.intralink.user.micro.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,7 +20,7 @@ import java.util.Set;
 public class AuthenticationService {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -61,7 +62,7 @@ public class AuthenticationService {
                         req.getPassword()
                 )
         );
-        var user = userRepository.findByMailNR(req.getEmail())
+        var user = userRepository.findByEmail(req.getEmail())
                 .orElseThrow();
         var jwtToken = jwtProvider.generateToken(user);
         return AuthenticationResponse.builder()

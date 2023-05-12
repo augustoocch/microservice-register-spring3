@@ -1,19 +1,12 @@
 
-package com.universityW3.controller;
+package com.intralink.user.micro.controller;
 
-import com.universityW3.DAO.UserDao;
-import com.universityW3.model.Roles;
-import com.universityW3.model.Users;
-import com.universityW3.service.UserService;
+import com.intralink.user.micro.model.Users;
+import com.intralink.user.micro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @RestController

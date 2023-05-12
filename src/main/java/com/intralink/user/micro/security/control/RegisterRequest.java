@@ -1,4 +1,4 @@
-package com.universityW3.security.control;
+package com.intralink.user.micro.security.control;
 
 
 import lombok.AllArgsConstructor;

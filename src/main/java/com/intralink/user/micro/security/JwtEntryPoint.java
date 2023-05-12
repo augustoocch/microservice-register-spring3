@@ -1,4 +1,4 @@
-package com.universityW3.security;
+package com.intralink.user.micro.security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

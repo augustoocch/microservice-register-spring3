@@ -1,4 +1,4 @@
-package com.universityW3.model;
+package com.intralink.user.micro.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,5 @@
-package com.universityW3.DAO;
+package com.intralink.user.micro.DAO;
 
-import com.universityW3.model.Users;
 import lombok.Builder;
 import lombok.Data;
 

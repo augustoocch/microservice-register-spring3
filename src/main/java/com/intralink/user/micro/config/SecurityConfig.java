@@ -1,8 +1,7 @@
-package com.universityW3.config;
+package com.intralink.user.micro.config;
 
 
-import com.universityW3.security.JwtProvider;
-import com.universityW3.security.JwtTokenFilter;
+import com.intralink.user.micro.security.JwtTokenFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
