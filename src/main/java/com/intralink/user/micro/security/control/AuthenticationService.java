@@ -48,7 +48,7 @@ public class AuthenticationService {
         var usr = userRepository.save(user);
         var jwtToken = jwtProvider.generateToken(usr);
         return AuthenticationResponse.builder()
-                .token(jwtToken)
+                .accessToken(jwtToken)
                 .build();
     }
 
@@ -65,7 +65,7 @@ public class AuthenticationService {
                 .orElseThrow();
         var jwtToken = jwtProvider.generateToken(user);
         return AuthenticationResponse.builder()
-                .token(jwtToken)
+                .accessToken(jwtToken)
                 .build();
     }
 }

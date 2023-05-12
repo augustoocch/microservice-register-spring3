@@ -29,8 +29,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtProvider jwtProvider;
 
-    @Autowired
-    private UserDetailsService userDetailedService;
+    private final UserDetailsService userDetailedService;
 
     @Override
     protected void doFilterInternal(
@@ -39,6 +38,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
+        if (request.getServletPath().contains("/api/v1/auth")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         //this contains the bearer token
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
@@ -70,9 +73,5 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         //Call the filter to pass the next filters
         filterChain.doFilter(request,response);
     }
-
-
-
-
 
 }

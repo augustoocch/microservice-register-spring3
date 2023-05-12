@@ -1,7 +1,5 @@
 package com.intralink.user.micro.security.control;
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
+public class AuthenticationRequest {
 
-    @JsonProperty("access_token")
-    private String accessToken;
-
-
+    private String email;
+    String password;
 }

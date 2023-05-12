@@ -39,12 +39,6 @@ public class JwtProvider {
         return claimsResolver.apply(claims);
     }
 
-    //Extract the signing key set as environmental value
-    private Key getSigningKey() {
-        byte [] keyBytes = Decoders.BASE64.decode(secret);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
-
     //Extrack the hole claims of the jwt
     private Claims extractAllClaims(String token) {
         return Jwts
@@ -53,6 +47,12 @@ public class JwtProvider {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    //Extract the signing key set as environmental value
+    private Key getSigningKey() {
+        byte [] keyBytes = Decoders.BASE64.decode(secret);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     //Gets the token expiration
@@ -76,7 +76,7 @@ public class JwtProvider {
                 .setClaims(extractClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
