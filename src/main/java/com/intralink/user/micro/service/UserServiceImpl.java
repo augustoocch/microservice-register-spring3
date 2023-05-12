@@ -4,7 +4,6 @@ import com.intralink.user.micro.model.Users;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.intralink.user.micro.repository.UserRepository;
 
@@ -32,7 +31,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Users save(Users user) {
-
         return userRepository.save(user);
     }
 

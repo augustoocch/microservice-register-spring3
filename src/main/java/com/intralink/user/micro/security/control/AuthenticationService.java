@@ -6,30 +6,28 @@ import com.intralink.user.micro.repository.UserRepository;
 import com.intralink.user.micro.security.JwtProvider;
 import com.intralink.user.micro.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationService {
 
     @Autowired
     UserService userRepository;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    JwtProvider jwtProvider;
-
-    @Autowired
-    AuthenticationManager authManager;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
+    private final AuthenticationManager authManager;
 
     public AuthenticationResponse register(RegisterRequest req) {
 
@@ -46,8 +44,9 @@ public class AuthenticationService {
                 .country(req.getCountry())
                 .city(req.getCity())
                 .build();
-        userRepository.save(user);
-        var jwtToken = jwtProvider.generateToken(user);
+        log.info("Saving user: {}", LocalDateTime.now());
+        var usr = userRepository.save(user);
+        var jwtToken = jwtProvider.generateToken(usr);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();

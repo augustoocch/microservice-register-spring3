@@ -18,11 +18,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
-    JwtTokenFilter jwtTokenFilter;
 
-    @Autowired
-    AuthenticationProvider authenticationProvider;
+    public final JwtTokenFilter jwtTokenFilter;
+    public final AuthenticationProvider authenticationProvider;
 
     //At the startup spring security will look up for the security filter chain
     // This is the bean responsible for httpSecurity
@@ -34,7 +32,7 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth")
+                .requestMatchers("/ordenrest/api/v1/auth/register")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
