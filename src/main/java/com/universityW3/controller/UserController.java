@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,16 +24,10 @@ public class UserController {
 
 
     @GetMapping(value = "/find-user/{user}")
-    public ResponseEntity<Users> findByMail(
-            @PathVariable(name ="user", required = true) String email) {
-        if (userServ.findByEmail(email) != null) {
-            Users usuario = new Users();
-            usuario.setEmail(email);
-            return new ResponseEntity("User found with email: " + usuario.getEmail(), HttpStatus.ACCEPTED);
-        }
-        else {
-            return new ResponseEntity("Username not found with email: " + email, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public Mono<ResponseEntity<Users>> findByMail(@PathVariable(name ="user", required = true) String email) {
+        return userServ.findByEmail(email)
+                .map(i -> ResponseEntity.ok().body(i))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
 

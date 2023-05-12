@@ -1,13 +1,14 @@
 package com.universityW3.repository;
 
 import com.universityW3.model.Users;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, Long> {
-    Optional<Users> findByEmail(String email);
+public interface UserRepository extends ReactiveCrudRepository<Users, Long> {
+
+    Mono<Users> findByEmail(String email);
+
 }
