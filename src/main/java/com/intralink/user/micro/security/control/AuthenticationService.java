@@ -53,7 +53,7 @@ public class AuthenticationService {
     }
 
 
-    public AuthenticationResponse authenticate(RegisterRequest req) {
+    public AuthenticationResponse authenticate(LoginRequest req) {
         //If the user is correct, will recover it from DB
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
