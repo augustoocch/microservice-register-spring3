@@ -4,13 +4,13 @@ package com.intralink.user.micro.controller;
 import com.intralink.user.micro.model.Users;
 import com.intralink.user.micro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/api/v1/users")
