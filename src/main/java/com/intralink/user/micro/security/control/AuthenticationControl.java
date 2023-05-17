@@ -25,7 +25,7 @@ public class AuthenticationControl {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate (@RequestBody LoginRequest req) {
+    public ResponseEntity<AuthenticationResponse> authenticate (@RequestBody AuthenticationRequest req) {
         log.info("Request received to authenticate: {}", LocalDateTime.now());
         return ResponseEntity.ok(authenticationService.authenticate(req));
     }

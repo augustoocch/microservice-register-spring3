@@ -26,9 +26,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
 
-    private JwtProvider jwtProvider;
+    @Autowired
+    JwtProvider jwtProvider;
 
-    private final UserDetailsService userDetailedService;
+    @Autowired
+    UserDetailsService userDetailedService;
 
     @Override
     protected void doFilterInternal(
@@ -37,10 +39,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
-/*        if (request.getServletPath().contains("/api/v1/auth")) {
+        if (request.getServletPath().contains("/api/v1/auth")) {
             filterChain.doFilter(request, response);
             return;
-        }*/
+        }
         //this contains the bearer token
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
