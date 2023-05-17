@@ -1,9 +1,5 @@
 package com.intralink.user.micro;
 
-import com.intralink.user.micro.config.SecurityConfig;
-import com.intralink.user.micro.repository.UserRepository;
-import com.intralink.user.micro.security.JwtTokenFilter;
-import com.intralink.user.micro.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;

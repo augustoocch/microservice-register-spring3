@@ -17,8 +17,6 @@ public class UserServiceImpl implements UserService{
     @Autowired
     public UserRepository userRepository;
 
-
-
     public Optional<Users> findByEmail(String email) {
 
         Optional<Users> user= userRepository.findAll()
