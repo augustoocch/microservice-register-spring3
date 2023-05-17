@@ -29,7 +29,7 @@ public class AuthenticationService {
     private final JwtProvider jwtProvider;
     private final AuthenticationManager authManager;
 
-    public AuthenticationResponse register(RegisterRequest req) {
+    public AuthenticationResponse register(RegisterRequest req) throws Exception {
 
         Set<Roles> roleSet = new HashSet<>();
         Roles role = new Roles(1, "USER");

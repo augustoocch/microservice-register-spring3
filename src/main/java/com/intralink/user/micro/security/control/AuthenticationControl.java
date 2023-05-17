@@ -19,7 +19,7 @@ public class AuthenticationControl {
     public final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register (@RequestBody RegisterRequest req) {
+    public ResponseEntity<AuthenticationResponse> register (@RequestBody RegisterRequest req) throws Exception {
         log.info("Request received to register: {}", LocalDateTime.now());
         return ResponseEntity.ok(authenticationService.register(req));
     }

@@ -28,8 +28,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Users save(Users user) {
-        return userRepository.save(user);
+    public Users save(Users user) throws Exception {
+        if (this.findByEmail(user.getEmail()).isPresent()) {
+            throw new Exception("User already exist");
+        }else {
+            return userRepository.save(user);
+        }
     }
 
 
