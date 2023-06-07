@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
-@ComponentScan(basePackages={"com.intralink.user.micro.config", "com.intralink.user.micro.controller", "com.intralink.user.micro.model","com.intralink.user.micro.repository", "com.intralink.user.micro.security","com.intralink.user.micro.security.control", "com.intralink.user.micro.service" })
+@ComponentScan(basePackages={"com.intralink.user.micro.config", "com.intralink.user.micro.controller",
+        "com.intralink.user.micro.model","com.intralink.user.micro.repository", "com.intralink.user.micro.security",
+        "com.intralink.user.micro.security.control", "com.intralink.user.micro.service" })
 public class ApplicationIntraLinkUserMicro {
 
     public static void main(String[] args) {

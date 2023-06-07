@@ -1,12 +1,11 @@
 
 package com.intralink.user.micro.controller;
 
+import com.intralink.user.micro.Exceptions.NotFoundUserEx;
 import com.intralink.user.micro.model.Users;
 import com.intralink.user.micro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -35,6 +34,11 @@ public class UserController {
             ex.printStackTrace();
             return ResponseEntity.status(400).build();
         }
+    }
+
+    @PutMapping(value = "/edit-user")
+    public ResponseEntity<Users> editUser (Users user) throws NotFoundUserEx, Exception {
+            return userServ.update(user);
     }
 
 

@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Data
 @Entity
 @Table(name = "role",
-        schema="universityW3")
+        schema="intraLink")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Roles {

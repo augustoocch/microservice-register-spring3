@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Data
 @Entity
 @Table(name="user",
-       schema = "universityW3")
+       schema = "intraLink")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
