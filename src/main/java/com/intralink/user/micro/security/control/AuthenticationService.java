@@ -36,8 +36,7 @@ public class AuthenticationService {
         Roles role = new Roles(1, "USER");
         roleSet.add(role);
 
-        Match match = new Match(1, "1", "1");
-
+        Match match = new Match();
         var user = Users.builder()
                 .name(req.getName())
                 .surname(req.getSurname())
@@ -48,6 +47,7 @@ public class AuthenticationService {
                 .city(req.getCity())
                 .matches(match)
                 .build();
+
         log.info("Saving user: {}", LocalDateTime.now());
         var usr = userRepository.save(user);
         var jwtToken = jwtProvider.generateToken(usr);
