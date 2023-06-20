@@ -1,5 +1,6 @@
 package com.intralink.user.micro.security.control;
 
+import com.intralink.user.micro.model.Match;
 import com.intralink.user.micro.model.Roles;
 import com.intralink.user.micro.model.Users;
 import com.intralink.user.micro.repository.UserRepository;
@@ -35,6 +36,8 @@ public class AuthenticationService {
         Roles role = new Roles(1, "USER");
         roleSet.add(role);
 
+        Match match = new Match(1, "1", "1");
+
         var user = Users.builder()
                 .name(req.getName())
                 .surname(req.getSurname())
@@ -43,6 +46,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(req.getPassword()))
                 .country(req.getCountry())
                 .city(req.getCity())
+                .matches(match)
                 .build();
         log.info("Saving user: {}", LocalDateTime.now());
         var usr = userRepository.save(user);

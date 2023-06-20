@@ -54,10 +54,13 @@ public class Users implements UserDetails {
     )
     private Set<Roles> roles;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_user")
+    private Match matches;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
         return List.of(new SimpleGrantedAuthority(roles.toString()));
     }
 
