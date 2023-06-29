@@ -2,7 +2,6 @@
 package com.intralink.user.micro.controller;
 
 import com.intralink.user.micro.Exceptions.NotFoundUserEx;
-import com.intralink.user.micro.model.Match;
 import com.intralink.user.micro.model.Users;
 import com.intralink.user.micro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

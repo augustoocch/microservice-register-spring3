@@ -54,9 +54,9 @@ public class Users implements UserDetails {
     )
     private Set<Roles> roles;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_user")
-    private Match matches;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Match match;
 
 
     @Override

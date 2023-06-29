@@ -3,8 +3,9 @@ package com.intralink.user.micro.security.control;
 import com.intralink.user.micro.model.Match;
 import com.intralink.user.micro.model.Roles;
 import com.intralink.user.micro.model.Users;
-import com.intralink.user.micro.repository.UserRepository;
+import com.intralink.user.micro.repository.MatchRepository;
 import com.intralink.user.micro.security.JwtProvider;
+import com.intralink.user.micro.service.MatchService;
 import com.intralink.user.micro.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,10 @@ import java.util.Set;
 public class AuthenticationService {
 
     @Autowired
-    UserService userRepository;
+    UserService userService;
+
+    @Autowired
+    MatchRepository matchRepository;
 
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
@@ -45,11 +49,14 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(req.getPassword()))
                 .country(req.getCountry())
                 .city(req.getCity())
-                .matches(match)
                 .build();
 
         log.info("Saving user: {}", LocalDateTime.now());
-        var usr = userRepository.save(user);
+        var usr = userService.save(user);
+        //Creating table of matches
+        match.setUser(usr);
+        match.setIdMail(user.getEmail());
+        matchRepository.save(match);
         var jwtToken = jwtProvider.generateToken(usr);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
@@ -65,7 +72,7 @@ public class AuthenticationService {
                         req.getPassword()
                 )
         );
-        var user = userRepository.findByEmail(req.getEmail())
+        var user = userService.findByEmail(req.getEmail())
                 .orElseThrow();
         var jwtToken = jwtProvider.generateToken(user);
         return AuthenticationResponse.builder()

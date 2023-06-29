@@ -19,10 +19,10 @@ import org.springframework.stereotype.Component;
 @PropertySource("application.properties")
 public class JwtProvider {
 
-    @Value("${jwt.secret}")
+    @Value("${JWT_SECRET}")
     private String secret;
 
-    @Value("${jwt.expiration}")
+    @Value("${JWT_EXPIRATION}")
     private long expiration;
 
     //Extract the username calling the extractClaim method
